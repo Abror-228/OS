@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AetherOS</title>
+  <meta name="description" content="AetherOS — a small web-based desktop">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+      <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 10l3 2-3 2M12 15h5"/></symbol>
+      <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20h4L19 10l-4-4L5 16z"/><path d="M13.5 7.5l4 4"/></symbol>
+      <symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
+      <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></symbol>
+      <symbol id="i-power" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v8"/><path d="M6.5 6.5a8 8 0 1 0 11 0"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h4l5 4V6L8 10z"/><path d="M16 9a4 4 0 0 1 0 6"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6L7 7M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17v-6a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21h4"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- BOOT -->
+  <div id="boot-screen">
+    <div class="boot-text">AetherOS</div>
+    <div class="boot-progress">
+      <div class="boot-progress-bar" id="boot-bar"></div>
+    </div>
+    <div class="boot-status" id="boot-status">Initializing kernel...</div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="login-screen">
+    <div class="login-time" id="login-time">00:00</div>
+    <div class="login-date" id="login-date">Thursday, October 15</div>
+    <div class="login-avatar" id="login-avatar">U</div>
+    <div class="login-username" id="login-username-display">User</div>
+    <div class="login-input-wrap">
+      <input type="password" class="login-input" id="login-password" placeholder="Password (or just press Enter)" autocomplete="off">
+      <button class="login-btn" id="login-btn">→</button>
+    </div>
+    <div class="login-hint">Press Enter to unlock</div>
+  </div>
+
+  <!-- DESKTOP -->
+  <div id="desktop">
+    <div class="desktop-particles" id="desktop-particles"></div>
+
+    <div class="desktop-widgets" id="desktop-widgets">
+      <div class="widget" id="widget-clock">
+        <div class="widget-title">Clock</div>
+        <div class="widget-clock-time" id="widget-clock-time">
+          00:00<span class="widget-clock-seconds" id="widget-clock-sec">00</span>
+        </div>
+        <div class="widget-clock-date" id="widget-clock-date">—</div>
+      </div>
+      <div class="widget" id="widget-weather">
+        <div class="widget-title">Weather</div>
+        <div class="widget-weather-temp">22°C</div>
+        <div class="widget-weather-desc">Partly cloudy</div>
+        <div class="widget-weather-details">
+          <span>Humidity 45%</span>
+          <span>Wind 12 km/h</span>
+        </div>
+      </div>
+      <div class="widget" id="widget-notes">
+        <div class="widget-title">Notes</div>
+        <textarea class="widget-notes-area" id="widget-notes-area" placeholder="Type your notes here..."></textarea>
+      </div>
+    </div>
+
+    <div id="windows-container"></div>
+  </div>
+
+  <!-- TOP BAR -->
+  <div id="orbit-bar" style="display:none;">
+    <div class="orbit-section orbit-left">
+      <div class="workspace-dots" id="workspace-dots">
+        <div class="workspace-dot active" data-ws="1" title="Workspace 1">1</div>
+        <div class="workspace-dot" data-ws="2" title="Workspace 2">2</div>
+        <div class="workspace-dot" data-ws="3" title="Workspace 3">3</div>
+        <div class="workspace-dot" data-ws="4" title="Workspace 4">4</div>
+      </div>
+    </div>
+    <div class="orbit-section orbit-center">
+      <span class="orbit-time" id="orbit-time">00:00</span>
+      <span class="orbit-date" id="orbit-date"></span>
+    </div>
+    <div class="orbit-section orbit-right">
+      <div class="tray-icon" id="tray-search" title="Search (Ctrl+Space)"><svg class="ic"><use href="#i-search"/></svg></div>
+      <div class="tray-icon" id="tray-volume" title="Volume"><svg class="ic"><use href="#i-volume"/></svg></div>
+      <div class="tray-icon" id="tray-brightness" title="Brightness"><svg class="ic"><use href="#i-sun"/></svg></div>
+      <div class="tray-icon" id="tray-notif" title="Notifications"><svg class="ic"><use href="#i-bell"/></svg></div>
+    </div>
+  </div>
+
+  <!-- SHELF -->
+  <div id="shelf" style="display:none;">
+    <div class="shelf-item" data-app="filemanager" title="Files"><svg class="ic"><use href="#i-folder"/></svg><span class="tooltip">Files</span></div>
+    <div class="shelf-item" data-app="terminal" title="Terminal"><svg class="ic"><use href="#i-terminal"/></svg><span class="tooltip">Terminal</span></div>
+    <div class="shelf-item" data-app="editor" title="Editor"><svg class="ic"><use href="#i-edit"/></svg><span class="tooltip">Editor</span></div>
+    <div class="shelf-item" data-app="calculator" title="Calculator"><svg class="ic"><use href="#i-calc"/></svg><span class="tooltip">Calculator</span></div>
+    <div class="shelf-item" data-app="browser" title="Browser"><svg class="ic"><use href="#i-globe"/></svg><span class="tooltip">Browser</span></div>
+    <div class="shelf-item" data-app="sysmonitor" title="System Monitor"><svg class="ic"><use href="#i-chart"/></svg><span class="tooltip">System Monitor</span></div>
+    <div class="shelf-item" data-app="aiimage" title="Image generator"><svg class="ic"><use href="#i-image"/></svg><span class="tooltip">Image generator</span></div>
+    <div class="shelf-separator"></div>
+    <div class="shelf-item" data-app="settings" title="Settings"><svg class="ic"><use href="#i-settings"/></svg><span class="tooltip">Settings</span></div>
+    <div class="shelf-spacer"></div>
+    <div class="shelf-item" id="shelf-power" title="Power"><svg class="ic"><use href="#i-power"/></svg><span class="tooltip">Power</span></div>
+  </div>
+
+  <!-- SEARCH / COMMAND PALETTE -->
+  <div id="nexus-overlay">
+    <div id="nexus-box">
+      <input type="text" id="nexus-input" placeholder="Search apps, files..." autocomplete="off">
+      <div id="nexus-results"></div>
+    </div>
+  </div>
+
+  <div id="context-menu"></div>
+
+  <!-- NOTIFICATIONS -->
+  <div id="notification-center">
+    <div class="notif-header">
+      <h3>Notifications</h3>
+      <button class="notif-clear" id="notif-clear-btn">Clear all</button>
+    </div>
+    <div class="quick-settings">
+      <div class="quick-toggle-row">
+        <div class="quick-toggle" id="qs-wifi">Wi-Fi</div>
+        <div class="quick-toggle active" id="qs-bluetooth">Bluetooth</div>
+        <div class="quick-toggle" id="qs-dnd">Do not disturb</div>
+      </div>
+      <div class="quick-toggle-row">
+        <div class="quick-toggle" id="qs-darkmode">Dark mode</div>
+        <div class="quick-toggle" id="qs-airplane">Airplane</div>
+        <div class="quick-toggle active" id="qs-location">Location</div>
+      </div>
+      <div class="quick-slider-row">
+        <span class="quick-slider-label"><svg class="ic"><use href="#i-volume"/></svg></span>
+        <input type="range" class="quick-slider" id="qs-volume" min="0" max="100" value="75">
+      </div>
+      <div class="quick-slider-row">
+        <span class="quick-slider-label"><svg class="ic"><use href="#i-sun"/></svg></span>
+        <input type="range" class="quick-slider" id="qs-brightness" min="30" max="100" value="100">
+      </div>
+    </div>
+    <div class="notif-list" id="notif-list"></div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <div id="dialog-overlay">
+    <div class="dialog-box">
+      <div class="dialog-title" id="dialog-title">Dialog</div>
+      <input type="text" class="dialog-input" id="dialog-input" autocomplete="off">
+      <div class="dialog-buttons">
+        <button class="dialog-btn" id="dialog-cancel">Cancel</button>
+        <button class="dialog-btn primary" id="dialog-ok">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="ai_studio.js"></script>
+</body>
+</html>
